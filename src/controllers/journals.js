@@ -1,4 +1,5 @@
 const journalsData = require("../../fixtures/journals.json");
+const Journals = require("../db/Journals");
 
 function setupJournals(server) {
   server.get("/", (req, res, next) => {
@@ -8,17 +9,14 @@ function setupJournals(server) {
 
   server.get({ name: "getJournal", path: "/journals/:id" }, getJournal);
 
-  server.get(
-    {
-      name: "journals",
-      path: "/journals"
-    },
-    journals
-  );
+  server.get("/journals", journals);
 }
 
-function journals(req, res, next) {
-  res.send(journalsData);
+async function journals(req, res, next) {
+  console.log(Journals);
+  console.log(await Journals.find());
+  //console.log(await Journals.find({ name: "John" }));
+  res.send(": /");
   next();
 }
 

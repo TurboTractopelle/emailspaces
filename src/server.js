@@ -5,7 +5,7 @@ const connection = require("./db/connection");
 const login = require("../.env").login;
 const pass = require("../.env").pass;
 
-connection(login, pass).then(res => {
+connection(login, pass).on("open", res => {
   console.log("Connected to mongo atlas");
   initServer();
 });

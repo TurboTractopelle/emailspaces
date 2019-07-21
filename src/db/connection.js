@@ -11,7 +11,7 @@ const options = {
 };
 
 function connection(login, pass) {
-  return mongoose.connect(url(login, pass), options);
+  return mongoose.createConnection(url(login, pass), options);
 }
 
 module.exports = connection;
