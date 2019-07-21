@@ -1,0 +1,15 @@
+@host = http://localhost:3000
+
+# get journals
+GET {{host}}/journals
+
+
+### get journal id 1
+GET {{host}}/journals/1
+
+### get journal id 10
+GET {{host}}/journals/10
+
+
+
+
