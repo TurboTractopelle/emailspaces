@@ -1,5 +1,5 @@
-const journals = require("./journals")
-const app = require("../app")
+const app = require("../app")()
+const request = require('supertest')
 
 describe("journals",()=>{
 

@@ -1,6 +1,8 @@
 const restify = require("restify");
 const journalsData = require("../../fixtures/journals.json")
 
+
+
 function setupJournals(server) {
   const router = server.router;
 
@@ -19,7 +21,6 @@ function setupJournals(server) {
     journals
   );
 
-  return server;
 }
 
 function journals(req, res, next) {
