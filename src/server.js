@@ -1,6 +1,14 @@
 const chalk = require("chalk");
 const PORT = process.env.PORT || 3000;
 const createServer = require("./app");
+const connection = require("./db/connection");
+const login = require("../.env").login;
+const pass = require("../.env").pass;
+
+connection(login, pass).then(res => {
+  console.log("Connected to mongo atlas");
+  initServer();
+});
 
 function initServer() {
   const server = createServer();
@@ -11,5 +19,3 @@ function initServer() {
     {cyan.underline http://localhost:${PORT}}`);
   });
 }
-
-initServer();
