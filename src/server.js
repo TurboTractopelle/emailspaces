@@ -8,7 +8,7 @@ function initServer() {
   server.listen(PORT, () => {
     console.log(chalk`
     {green ✅  ${server.name} REST server started at}
-    {cyan.underline ${server.url}}`);
+    {cyan.underline http://localhost:${PORT}}`);
   });
 }
 
