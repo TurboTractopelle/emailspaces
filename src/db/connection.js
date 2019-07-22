@@ -1,17 +1,26 @@
 const mongoose = require("mongoose");
+const chalk = require("chalk");
 
-const url = (login, pass) =>
-  `mongodb+srv://${login}:${pass}@cluster0-0clli.mongodb.net/test?retryWrites=true`;
-
+const url = (login, pass) => {
+	if (global.MONGODB_URI) {
+		console.log(chalk`{red.bold memserver}`);
+	}
+	return (
+		global.MONGODB_URI ||
+		`mongodb+srv://${login}:${pass}@cluster0-0clli.mongodb.net/test?retryWrites=true`
+	);
+};
 const options = {
-  connectTimeoutMS: 5000,
-  reconnectInterval: 100,
-  useCreateIndex: true,
-  useNewUrlParser: true
+	connectTimeoutMS: 5000,
+	reconnectInterval: 100,
+	useCreateIndex: true,
+	useNewUrlParser: true
 };
 
 function connection(login, pass) {
-  return mongoose.createConnection(url(login, pass), options);
+	const connection = mongoose.createConnection(url(login, pass), options);
+	mongoose.set("useFindAndModify", false);
+	return connection;
 }
 
 module.exports = connection;
