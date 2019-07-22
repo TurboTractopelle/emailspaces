@@ -1,4 +1,4 @@
-const journalsData = require("../../fixtures/journals.json");
+const journalsData = require("../../fixtures/journals.js/index.js");
 const Journals = require("../db/Journals");
 
 function setupJournals(server) {

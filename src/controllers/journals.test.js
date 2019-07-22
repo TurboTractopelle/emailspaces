@@ -2,7 +2,8 @@ const app = require("../app")();
 const request = require("supertest");
 const connection = require("../db/connection");
 const Journals = require("../db/Journals");
-const fakeData = require("../../fixtures/journals.json");
+const fakeData = require("../../fixtures/journals");
+const chalk = require("chalk");
 
 describe("journals", () => {
 	it("should display the journals", async () => {
@@ -29,12 +30,14 @@ describe("journals with mongodb-memory db", () => {
 	});
 
 	afterAll(() => {
+		console.log(chalk`{green.bold Close mongo-memory connection}`);
 		connection.close();
 	});
 
 	it("should work", async () => {
 		return await request(app)
 			.get("/journals")
-			.expect(200);
+			.expect(200)
+			.then(res => console.log(res.body));
 	});
 });
