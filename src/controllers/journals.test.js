@@ -2,7 +2,8 @@ const app = require("../app")();
 const request = require("supertest");
 const connection = require("../db/connection");
 const Journals = require("../db/Journals");
-const fakeData = require("../../fixtures/journals");
+const fakeData = require("../../fixtures/journals.js");
+mantis;
 const chalk = require("chalk");
 
 describe("journals", () => {
