@@ -5,24 +5,6 @@ const Journals = require("../db/Journals");
 const fakeJournalsData = require("../../fixtures/fakeJournalsData");
 const chalk = require("chalk");
 
-describe("journals", () => {
-  it("should display the journals", async () => {
-    return await request(app)
-      .get("/journals")
-      .expect(200);
-  });
-  it("gets journal id after 5", async () => {
-    return await request(app)
-      .get("/journals/6")
-      .expect(500);
-  });
-  it("gets journal id below 5", async () => {
-    return await request(app)
-      .get("/journals/4")
-      .expect(200);
-  });
-});
-
 describe("journals with mongodb-memory db", () => {
   beforeAll(async () => {
     await Journals.deleteMany({});
@@ -34,10 +16,16 @@ describe("journals with mongodb-memory db", () => {
     connection.close();
   });
 
-  it("should work", async () => {
+  it("should display all journal", async () => {
     return await request(app)
       .get("/journals")
       .expect(200)
-      .then(res => console.log(res.body[0]));
+      .then(res => expect(res.body.length).toBe(3));
+  });
+
+  it("should display a journal data", async () => {
+    return await request(app)
+      .get("/journals/A")
+      .then(res => expect(res.body[0].dl).toBe(10));
   });
 });

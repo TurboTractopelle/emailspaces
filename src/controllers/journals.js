@@ -2,13 +2,14 @@ const fakeJournalsData = require("../../fixtures/fakeJournalsData");
 const Journals = require("../db/Journals");
 
 function setupJournals(server) {
-  server.get("/", (req, res, next) => {
-    res.send("API guide coming one day");
-    next();
-  });
-
-  server.get({ name: "getJournal", path: "/journals/:id" }, getJournal);
+  server.get("/", home);
   server.get("/journals", journals);
+  server.get({ name: "getJournal", path: "/journals/:title" }, getJournal);
+}
+
+function home(req, res, next) {
+  res.send("API guide coming one day");
+  next();
 }
 
 async function journals(req, res, next) {
@@ -17,17 +18,10 @@ async function journals(req, res, next) {
   next();
 }
 
-function getJournal(req, res, next) {
-  if (req.params.id && req.params.id > 5) {
-    res.status(500);
-    res.send("nope");
-    next();
-  } else {
-    res.send(
-      fakeJournalsData.filter(journal => journal.id === req.params.id)[0]
-    );
-    next();
-  }
+async function getJournal(req, res, next) {
+  const data = await Journals.find({ title: req.params.title });
+  res.send(data);
+  next();
 }
 
 module.exports = setupJournals;
