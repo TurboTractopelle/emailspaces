@@ -1,5 +1,5 @@
 module.exports = [
-  { title: "A", dl: "10" },
-  { title: "B", dl: "5" },
-  { title: "C", dl: "2" }
+  { title: "A", downloads: 10 },
+  { title: "B", downloads: 5 },
+  { title: "C", downloads: 2 }
 ];

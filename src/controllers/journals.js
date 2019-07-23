@@ -13,13 +13,15 @@ function home(req, res, next) {
 }
 
 async function journals(req, res, next) {
-  const journals = await Journals.find();
-  res.send(journals);
+  const { max } = req.query;
+  console.log("MAX", req.query);
+  data = await Journals.search({ max });
+  res.send(data);
   next();
 }
 
 async function getJournal(req, res, next) {
-  const data = await Journals.find({ title: req.params.title });
+  const data = await Journals.findOne({ title: req.params.title });
   res.send(data);
   next();
 }

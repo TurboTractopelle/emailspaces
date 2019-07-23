@@ -3,12 +3,14 @@
 # get journals
 GET {{host}}/journals
 
+### get journals with filter
+GET {{host}}/journals?max=5
 
-### get journal id 1
-GET {{host}}/journals/1
 
-### get journal id 10
-GET {{host}}/journals/10
+### get journal title A
+GET {{host}}/journals/A
+
+
 
 
 

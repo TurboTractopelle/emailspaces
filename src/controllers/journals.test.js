@@ -23,9 +23,19 @@ describe("journals with mongodb-memory db", () => {
       .then(res => expect(res.body.length).toBe(3));
   });
 
+  it("should filter all journals by max", async () => {
+    return await request(app)
+      .get("/journals?max=2")
+      .expect(200)
+      .then(res => {
+        console.log(res.body);
+        expect(res.body.length).toBe(1);
+      });
+  });
+
   it("should display a journal data", async () => {
     return await request(app)
       .get("/journals/A")
-      .then(res => expect(res.body[0].dl).toBe(10));
+      .then(res => expect(res.body.downloads).toBe(10));
   });
 });
