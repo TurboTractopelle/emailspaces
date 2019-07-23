@@ -7,7 +7,7 @@ const url = (login, pass) => {
   }
   return (
     global.MONGODB_URI ||
-    `mongodb+srv://${login}:${pass}@cluster0-0clli.mongodb.net/test?retryWrites=true`
+    `mongodb+srv://${login}:${pass}@cluster0-0clli.mongodb.net/sample_training?retryWrites=true`
   );
 };
 const options = {

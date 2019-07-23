@@ -6,10 +6,12 @@ GET {{host}}/journals
 ### get journals with filter
 GET {{host}}/journals?max=5
 
-
 ### get journal title A
 GET {{host}}/journals/A
 
+
+### get inspections
+GET {{host}}/inspections
 
 
 
