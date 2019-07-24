@@ -50,4 +50,13 @@ describe("Inspections routes", () => {
         expect(res.body[0]._id).toBe("Cigarette Retail Dealer - 127");
       });
   });
+
+  it("loads the business", () => {
+    return request(app)
+      .get("/inspections/VYACHESLAV%20KANDZHANOV")
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).toBe(1);
+      });
+  });
 });

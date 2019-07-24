@@ -4,6 +4,7 @@ function setupInspections(server) {
   server.get("/inspections", getAllInspections);
   server.get("/inspections/cities", getAllCities);
   server.get("/inspections/sectors", getAllSectors);
+  server.get("/inspections/:name", getBusinessHistory);
 }
 
 async function getAllInspections(req, res, next) {
@@ -21,6 +22,12 @@ async function getAllCities(req, res, next) {
 async function getAllSectors(req, res, next) {
   const allSectors = await Inspections.getAllSectors();
   res.send(allSectors);
+}
+
+async function getBusinessHistory(req, res, next) {
+  const name = req.params;
+  const businessHistory = await Inspections.getBusinessHistory(name);
+  res.send(businessHistory);
 }
 
 module.exports = setupInspections;

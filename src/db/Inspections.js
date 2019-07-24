@@ -21,6 +21,7 @@ const inspectionsSchema = new mongoose.Schema({
 inspectionsSchema.statics.search = search;
 inspectionsSchema.statics.getAllCities = getAllCities;
 inspectionsSchema.statics.getAllSectors = getAllSectors;
+inspectionsSchema.statics.getBusinessHistory = getBusinessHistory;
 
 async function search(filters) {
   console.log(filters);
@@ -96,6 +97,16 @@ async function getAllSectors() {
       }
     }
   ]);
+  return data;
+}
+
+async function getBusinessHistory({ name }) {
+  console.log(name);
+  const data = await this.find({
+    business_name: { $regex: name, $options: "i" }
+  })
+    .sort({ date: -1 })
+    .limit(5);
   return data;
 }
 

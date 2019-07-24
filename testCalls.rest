@@ -25,6 +25,9 @@ GET {{host}}/inspections/cities
 ### get sectors
 GET {{host}}/inspections/sectors
 
+### get sectors
+GET {{host}}/inspections/MICHAEL%20GOMEZ%20RANGHALL
+
 
 
 
