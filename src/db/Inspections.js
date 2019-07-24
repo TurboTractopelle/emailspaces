@@ -22,6 +22,7 @@ inspectionsSchema.statics.search = search;
 inspectionsSchema.statics.getAllCities = getAllCities;
 inspectionsSchema.statics.getAllSectors = getAllSectors;
 inspectionsSchema.statics.getBusinessHistory = getBusinessHistory;
+inspectionsSchema.statics.statesBySectors = statesBySectors;
 
 async function search(filters) {
   console.log(filters);
@@ -107,6 +108,34 @@ async function getBusinessHistory({ name }) {
   })
     .sort({ date: -1 })
     .limit(5);
+  return data;
+}
+
+async function statesBySectors() {
+  const data = await this.aggregate([
+    {
+      $group: {
+        _id: {
+          result: "$result",
+          sector: "$sector"
+        },
+        total: {
+          $sum: 1
+        }
+      }
+    },
+    {
+      $group: {
+        _id: "$_id.sector",
+        stuff: {
+          $push: {
+            total: "$total",
+            result: "$_id.result"
+          }
+        }
+      }
+    }
+  ]);
   return data;
 }
 
