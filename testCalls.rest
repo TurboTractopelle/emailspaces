@@ -17,6 +17,9 @@ GET {{host}}/inspections
 GET {{host}}/inspections?city=new%20york
 
 ### get inspections
+GET {{host}}/inspections?city=new%20york&sector=Cigarette%20Retail%20Dealer%20-%20127
+
+### get inspections
 GET {{host}}/inspections/cities
 
 ### get sectors
