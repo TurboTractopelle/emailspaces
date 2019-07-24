@@ -17,7 +17,11 @@ GET {{host}}/inspections
 GET {{host}}/inspections?city=new%20york
 
 ### get inspections
-GET {{host}}/inspections/city
+GET {{host}}/inspections/cities
+
+### get sectors
+GET {{host}}/inspections/sectors
+
 
 
 

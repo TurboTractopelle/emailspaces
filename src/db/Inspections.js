@@ -20,17 +20,15 @@ const inspectionsSchema = new mongoose.Schema({
 
 inspectionsSchema.statics.search = search;
 inspectionsSchema.statics.getAllCities = getAllCities;
+inspectionsSchema.statics.getAllSectors = getAllSectors;
 
 async function search(filters) {
   console.log(filters.city);
   if (filters.city) {
-    return this.find(
-      {
-        business_name: { $ne: "" },
-        "address.city": filters.city.toUpperCase()
-      },
-      { business_name: 1, address: 1 }
-    )
+    return this.find({
+      business_name: { $ne: "" },
+      "address.city": filters.city.toUpperCase()
+    })
       .limit(10)
       .sort({ business_name: 1 });
   }
@@ -71,6 +69,23 @@ async function getAllCities() {
   ]);
 
   return data[0];
+}
+
+async function getAllSectors() {
+  const data = await Inspections.aggregate([
+    {
+      $group: {
+        _id: "$sector",
+        nb: { $sum: 1 }
+      }
+    },
+    {
+      $sort: {
+        _id: 1
+      }
+    }
+  ]);
+  return data;
 }
 
 const Inspections = connection.model("Inspections", inspectionsSchema);

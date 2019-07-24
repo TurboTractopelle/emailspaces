@@ -34,10 +34,20 @@ describe("Inspections routes", () => {
 
   it("loads the cities list", () => {
     return request(app)
-      .get("/inspections/city")
+      .get("/inspections/cities")
       .expect(200)
       .then(res => {
         expect(res.body.nbTotal).toBe(2);
+      });
+  });
+
+  it("loads the sectors", () => {
+    return request(app)
+      .get("/inspections/sectors")
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).toBe(2);
+        expect(res.body[0]._id).toBe("Cigarette Retail Dealer - 127");
       });
   });
 });
