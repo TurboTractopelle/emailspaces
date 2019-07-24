@@ -13,6 +13,11 @@ GET {{host}}/journals/A
 ### get inspections
 GET {{host}}/inspections
 
+### get inspections
+GET {{host}}/inspections?city=new%20york
+
+### get inspections
+GET {{host}}/inspections/city
 
 
 
